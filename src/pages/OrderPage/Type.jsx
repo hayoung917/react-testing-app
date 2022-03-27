@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Products from "./Products";
 import ErrorBanner from "../../component/ErrorBanner";
+import Options from "./Options";
 
 function Type({ orderType }) {
   const [items, setItems] = useState([]);
@@ -20,7 +21,7 @@ function Type({ orderType }) {
     }
   };
 
-  const ItemComponents = orderType === "products" ? Products : null;
+  const ItemComponents = orderType === "products" ? Products : Options;
 
   const optionItems = items.map((item) => (
     <ItemComponents
