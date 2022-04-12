@@ -62,4 +62,21 @@ test("From order to order completion", async () => {
     name: "주문 확인",
   });
   userEvent.click(confirmOrderButton);
+
+  // 주문 완료 페이지
+  const loading = screen.getByText(/loading/i);
+  expect(loading).toBeInTheDocument();
+
+  const completeHeader = await screen.findByRole("heading", {
+    name: "주문이 성공했습니다.",
+  });
+  expect(completeHeader).toBeInTheDocument();
+
+  // 데이터를 받아온 후에 loading 문구는 사라집니다.
+  const loadingDisappeared = screen.queryByText("loading");
+  expect(loadingDisappeared).not.toBeInTheDocument();
+
+  // 첫번째 페이지로 버튼 클릭
+  const firstPageButton = screen.getByRole("button", { name: "첫 페이지로" });
+  userEvent.click(firstPageButton);
 });
