@@ -11,8 +11,6 @@ function Type({ orderType }) {
 
   const [orderData, updateItemCount] = useContext(OrderContext);
 
-  console.log('orderData', orderData);
-
   useEffect(() => {
     loadItems(orderType);
   }, [orderType]);
@@ -38,10 +36,10 @@ function Type({ orderType }) {
       }
     />
   ));
-  
-// if (error) {
-  //   return <ErrorBanner message="에러가 발생했습니다." />;
-  // }
+
+  if (error) {
+    return <ErrorBanner message="에러가 발생했습니다." />;
+  }
 
   return (
     <div>
