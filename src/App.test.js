@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import App from "./App";
 
@@ -79,4 +79,9 @@ test("From order to order completion", async () => {
   // 첫번째 페이지로 버튼 클릭
   const firstPageButton = screen.getByRole("button", { name: "첫 페이지로" });
   userEvent.click(firstPageButton);
+
+  // await waitFor(() => {
+  //   screen.getByRole("spinbutton", { name: "America" });
+  // });
+  await screen.findByRole("spinbutton", { name: "America" });
 });
