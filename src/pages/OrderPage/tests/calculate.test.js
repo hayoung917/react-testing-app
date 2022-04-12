@@ -25,3 +25,28 @@ test("update product's total when products change", async () => {
   userEvent.type(englandInput, "3");
   expect(productsTotal).toHaveTextContent("4000");
 });
+
+test("update options's total when options change", async () => {
+  render(<Type orderType="options" />);
+
+  // 옵션 총 가격이 0부터 시작
+  const optionsTotal = screen.getByText("총 가격: ", { exact: false });
+  expect(optionsTotal).toHaveTextContent("0");
+
+  // 보험 옵션 추가
+  const insuranceCheckbox = await screen.findByRole("checkbox", {
+    name: "Insurance",
+  });
+  userEvent.click(insuranceCheckbox);
+
+  // 디너 옵션 추가
+  const dinnerCheckbox = await screen.findByRole("checkbox", {
+    name: "Dinner",
+  });
+  userEvent.click(dinnerCheckbox);
+  expect(optionsTotal).toHaveTextContent("1000");
+
+  // 디너 옵션 제거
+  userEvent.click(dinnerCheckbox);
+  expect(optionsTotal).toHaveTextContent("500");
+});
