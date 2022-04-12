@@ -9,7 +9,7 @@ test("From order to order completion", async () => {
     name: "America",
   });
   userEvent.clear(americaInput);
-  userEvent.type(americaInput, "1");
+  userEvent.type(americaInput, "2");
 
   const englandInput = await screen.findByRole("spinbutton", {
     name: "England",
